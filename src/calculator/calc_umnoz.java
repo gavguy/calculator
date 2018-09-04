@@ -1,8 +1,7 @@
 package calculator;
 
-import javax.print.DocFlavor;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -15,9 +14,9 @@ class Calculator {
     String calculate(String[] expression) {
         List<String> tmp = new ArrayList<>();
         double a = Double.parseDouble(expression[0]);
-        for (int i = 1; i < expression.length; i++) {
-            String op = expression[3];
-            double b = Double.parseDouble(expression[i += 2]);
+        for (int i = 1; i < expression.length; i+=2) {
+            String op = expression[i];
+            double b = Double.parseDouble(expression[i + 1]);
             switch (op) {
                 case "+":
                 case "-":
@@ -28,20 +27,18 @@ class Calculator {
                 case "*":
                     a *= b;
                     break;
-                a /= b;
                 case "/":
+                    a /= b;
+                    break;
             }
         }
 
         tmp.add(String.valueOf(a));
-        System.out.println();
 
-
-
-
+        System.out.println(tmp);
 
         double result = Double.parseDouble(tmp.get(0));
-        for (int i = 1; i <tmp.size(); i += 2) {
+        for (int i = 1; i < tmp.size(); i += 2) {
             String op = tmp.get(i);
             double b = Double.parseDouble(tmp.get(i + 1));
             switch (op) {
@@ -52,12 +49,11 @@ class Calculator {
                     result -= b;
                     break;
                 default:
-                    return "error";
+                    return "ERROR";
             }
         }
 
         return String.valueOf(result);
-
     }
 
 }
